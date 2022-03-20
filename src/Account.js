@@ -4,9 +4,12 @@ import { supabase } from './supabaseClient'
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
+  const [chekin, setChekin] = useState(null)
+  const [chekout, setChekout] = useState(null)
+  const [placas, setPlacas] = useState(null)
 
+
+  //Usuarios
   useEffect(() => {
     getProfile()
   }, [session])
@@ -15,10 +18,9 @@ const Account = ({ session }) => {
     try {
       setLoading(true)
       const user = supabase.auth.user()
-
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, chekin, chekout`)
+        .select(`username, chekin, placas`)
         .eq('id', user.id)
         .single()
 
@@ -28,8 +30,8 @@ const Account = ({ session }) => {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
+        setChekin(data.chekin)
+        setPlacas(data.placas)
       }
     } catch (error) {
       alert(error.message)
@@ -37,7 +39,31 @@ const Account = ({ session }) => {
       setLoading(false)
     }
   }
+  //chekout
+  const getChekout = async () => {
+    try {
+      setLoading(true)
+      const user = supabase.auth.user()
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select(`chekout`)
+        .eq('id', user.id)
+        .single()
 
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setChekout(data.chekout)
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+//Actualizacion de usuarios (Alta)
   const updateProfile = async (e) => {
     e.preventDefault()
 
@@ -48,8 +74,9 @@ const Account = ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        website,
-        avatar_url,
+        chekin: new Date(),
+        placas,
+        chekout: new Date(),
         updated_at: new Date(),
       }
 
@@ -73,31 +100,32 @@ const Account = ({ session }) => {
         'Saving ...'
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
-          <div>Usuario: {session.user.email}</div>
+          <div>Usuario: {session.user.email} </div>
           <div>
-            <label htmlFor="username">Numero de placas</label>
+          <label htmlFor="username">Nombre</label>
             <input
               id="username"
               type="text"
               value={username || ''}
               onChange={(e) => setUsername(e.target.value)}
             />
-          </div>
-          <div>
-            <label htmlFor="website">Website</label>
+            <label htmlFor="username">Numero de placas</label>
             <input
-              id="website"
-              type="url"
-              value={website || ''}
-              onChange={(e) => setWebsite(e.target.value)}
+              id="username"
+              type="text"
+              value={placas || ''}
+              onChange={(e) => setPlacas(e.target.value)}
             />
-          </div>
-          <div>
+
+          <div> Hora de entrada: {chekin || 'De click en el boton verde para comenzar su tiempo'}</div>
+
+          <div> Hora de salida: {chekout || 'De click en el boton rojo para finalizar su tiempo'}</div>
             <button className="button block primary" disabled={loading}>
               Click para ingresar hora de entrada
             </button>
-            <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
-              Checar hora de salida
+            <label ></label>
+            <button className="button block second" disabled={loading}>
+              Click para ingresar hora de salida
             </button>
           </div>
         </form>

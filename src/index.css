@@ -289,6 +289,12 @@ button.primary,
     border: 1px solid var(--custom-color-brand);
 }
 
+button.second,
+.button.second {
+    background-color: #cb3234;
+    border: 1px solid var(--custom-color-brand);
+}
+
 
 /* Widgets */
 
