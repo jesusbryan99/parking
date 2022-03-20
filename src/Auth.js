@@ -23,23 +23,24 @@ export default function Auth() {
   return (
     <div className="row flex flex-center">
       <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">Sign in via magic link with your email below</p>
+        <h1 className="header">Estacionamiento</h1>
+        <p className="description">Ingresa tu correo para iniciar sesion</p>
         {loading ? (
           'Sending magic link...'
         ) : (
           <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo</label>
             <input
               id="email"
               className="inputField"
               type="email"
-              placeholder="Your email"
+              placeholder="Ingrese su correo electronico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            <p className="description"></p>
             <button className="button block" aria-live="polite">
-              Send magic link
+              Enviar enlace a correo electronico
             </button>
           </form>
         )}

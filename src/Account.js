@@ -18,7 +18,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`username, chekin, chekout`)
         .eq('id', user.id)
         .single()
 
@@ -73,9 +73,9 @@ const Account = ({ session }) => {
         'Saving ...'
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
-          <div>Email: {session.user.email}</div>
+          <div>Usuario: {session.user.email}</div>
           <div>
-            <label htmlFor="username">Name</label>
+            <label htmlFor="username">Numero de placas</label>
             <input
               id="username"
               type="text"
@@ -94,14 +94,15 @@ const Account = ({ session }) => {
           </div>
           <div>
             <button className="button block primary" disabled={loading}>
-              Update profile
+              Click para ingresar hora de entrada
+            </button>
+            <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
+              Checar hora de salida
             </button>
           </div>
         </form>
       )}
-      <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
-        Sign Out
-      </button>
+   
     </div>
   )
 }
