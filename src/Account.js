@@ -33,19 +33,27 @@ console.log(res2);
     const hora1 = parseFloat(res2);
     const hora2 = parseFloat(result2);
     const resultado = hora1-hora2;
-    console.log("el resutado " + resultado );
-    const comprobar = resultado.Length;
-    
-    
-    for (var i=0; i < resultado.length; i++) {
-      document.write(resultado[i] + ":");
-   }
     
     return resultado;
-    
+}
+
+function ticket() {
+ const cobro= horaPariking();
+const aux =15;
+const aux2=30;
+const aux3=45;
+if (cobro>1500 &&cobro<19999) {
+  return aux;
+}
+else if (cobro>20000 &&cobro<29999) {
+  return aux2;
+}
+
+else {
+  return aux3 + " Esta es la rarifa maxima";
+}
 }
   
-
   //Usuarios
   useEffect(() => {
     getProfile()
@@ -160,11 +168,15 @@ console.log(res2);
             </button>
             <label ></label>
            
-           <div>Horas que en el estacionamiento: {horaPariking()} 
+           <div>Horas que en el estacionamiento: {horaPariking()} <br />
+           Su cobro seria de un total de; ${ticket()}
            </div>
-            
+           <button className="button block" disabled={loading}>
+              Opciones para administrador
+            </button>    
           </div>
         </form>
+        
       )}
    
     </div>
