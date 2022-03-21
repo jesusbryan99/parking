@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 
+
+
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
@@ -20,6 +22,9 @@ function hora(){
 }
 function horaPariking() {
 //Conversion de chekin para resta
+if (chekin != true) {
+  
+}else{
     var cadena = chekin;
     let result1 = cadena.replace(":", "");
     let result2 = result1.replace(":","");
@@ -35,6 +40,7 @@ console.log(res2);
     const resultado = hora1-hora2;
     
     return resultado;
+    }
 }
 
 function ticket() {
@@ -99,7 +105,7 @@ else {
         chekin: hora(),
         placas,
         chekout,
-        visitas,
+        visitas:+1,
         updated_at: new Date(),
       }
 
@@ -169,12 +175,37 @@ else {
             <label ></label>
            
            <div>Horas que en el estacionamiento: {horaPariking()} <br />
-           Su cobro seria de un total de; ${ticket()}
+           Su cobro seria de un total de; ${ticket() || 'No hay datos aun'}
            </div>
-           <button className="button block" disabled={loading}>
-              Opciones para administrador
-            </button>    
+    
           </div>
+
+           <table class="default">
+
+<tr>
+
+  <td>Nombre</td>
+
+  <td>Placa</td>
+
+  <td>Numero de visitas</td>
+
+</tr>
+
+<tr>
+
+  <td>{username}</td>
+
+  <td>{placas}</td>
+
+  <td>{visitas}</td>
+
+</tr>
+
+</table>
+<button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
+        Cerrar sesion
+      </button>
         </form>
         
       )}
