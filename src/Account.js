@@ -34,9 +34,18 @@ console.log(res2);
     const hora2 = parseFloat(result2);
     const resultado = hora1-hora2;
     console.log("el resutado " + resultado );
+    const comprobar = resultado.Length;
+    
+    
+    for (var i=0; i < resultado.length; i++) {
+      document.write(resultado[i] + ":");
+   }
+    
     return resultado;
- 
+    
 }
+  
+
   //Usuarios
   useEffect(() => {
     getProfile()
@@ -151,7 +160,8 @@ console.log(res2);
             </button>
             <label ></label>
            
-           <div>Horas que en el estacionamiento: {horaPariking()} </div>
+           <div>Horas que en el estacionamiento: {horaPariking()} 
+           </div>
             
           </div>
         </form>
