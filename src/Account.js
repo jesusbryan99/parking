@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 
-
-
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
@@ -22,7 +20,7 @@ function hora(){
 }
 function horaPariking() {
 //Conversion de chekin para resta
-if (chekin != true) {
+if (chekin !== true) {
   
 }else{
     var cadena = chekin;
