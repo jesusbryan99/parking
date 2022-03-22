@@ -10,38 +10,36 @@ const Account = ({ session }) => {
   const [visitas, setVisitas] = useState(null)
 
 function hora(){
-    const result = format(new Date(), 'hh:mm:ss')
+    const result = format(new Date(), 'HH:mm:ss')
     console.log(result);
     return result;
 }
 function horaPariking() {
 //Conversion de chekin para resta----------------------------------------------------------------
- 
-if (chekin !== true) {
-  
-}else{
-    var cadena = chekin;
-    let result1 = cadena.replace(":", "");
-    let result2 = result1.replace(":","");
-
-//Conversion de chekin para resta
-var cadena2 = chekout;
-let res1 = cadena2.replace(":", "");
-let res2 = res1.replace(":","");
-console.log(res2); 
-
-    const hora1 = parseFloat(res2);
-    const hora2 = parseFloat(result2);
-    const resultado = hora1-hora2;
-    
-    return resultado;
-    }
+if (chekin !== null ) {
+  //se remplazan los ":" del chekin   
+  const cadena = chekin;
+  const result1 = cadena.replace(":", "");
+  const result2 = result1.replace(":","");
+  //se remplazan los ":" del chekout  
+  const cadena2 = chekout;
+  const res1 = cadena2.replace(":", "");
+  const res2 = res1.replace(":","");
+  //Se realiza la resta de ambos
+  const hora1 = parseFloat(res2);
+  const hora2 = parseFloat(result2);
+  const resultado = hora1-hora2;
+  console.log(resultado);
+  return resultado;
+  }else{
+    console.log("error");
+  }    
 
 }
 //fin--------------------------------------------------------------------------------------------
 //Funcion para hacer el cobro por hora-----------------------------------------------------------
 function ticket() {
- const cobro= horaPariking();
+ const cobro= horaPariking() ;
 const aux =15;
 const aux2=30;
 const aux3=45;
