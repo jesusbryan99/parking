@@ -10,30 +10,21 @@ const Account = ({ session }) => {
   const [visitas, setVisitas] = useState(null)
 
 function hora(){
-    const result = format(new Date(), 'HH:mm:ss')
+    const result = format(new Date(), 'HHmmss')
     console.log(result);
     return result;
 }
 function horaPariking() {
 //Conversion de chekin para resta----------------------------------------------------------------
-if (chekin !== null ) {
-  //se remplazan los ":" del chekin   
-  const cadena = chekin;
-  const result1 = cadena.replace(":", "");
-  const result2 = result1.replace(":","");
-  //se remplazan los ":" del chekout  
+
+  const cadena = chekin;  
   const cadena2 = chekout;
-  const res1 = cadena2.replace(":", "");
-  const res2 = res1.replace(":","");
-  //Se realiza la resta de ambos
-  const hora1 = parseFloat(res2);
-  const hora2 = parseFloat(result2);
-  const resultado = hora1-hora2;
+  const hora1 = parseFloat(cadena);
+  const hora2 = parseFloat(cadena2);
+  const resultado = hora2 - hora1;
   console.log(resultado);
   return resultado;
-  }else{
-    console.log("error");
-  }    
+ 
 
 }
 //fin--------------------------------------------------------------------------------------------
@@ -43,7 +34,11 @@ function ticket() {
 const aux =15;
 const aux2=30;
 const aux3=45;
-if (cobro>1500 &&cobro<19999) {
+const aux4 = "Tu estancia es menor a la permitida, sal de manera gratuita";
+if (cobro> 0 && cobro<=1499) {
+  return aux;
+}
+else if (cobro>1500 &&cobro<19999) {
   return aux;
 }
 else if (cobro>20000 &&cobro<29999) {
@@ -229,7 +224,7 @@ function sumarVisita() {
             </button>
             
 
-            <div>Horas que en el estacionamiento: {horaPariking()} <br />
+            <div>Tiempo que permanecio: {horaPariking()} <br />
               Su cobro seria de un total de: ${ticket() || 'No hay datos aun'}
             </div>
 
