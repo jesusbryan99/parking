@@ -102,7 +102,7 @@ else {
         username,
         chekin: hora(),
         placas,
-        visitas:+1,
+        visitas: sumarVisita(),
         updated_at: new Date(),
       }
 
@@ -181,7 +181,17 @@ const updateChekout = async (e) => {
 }
 //----------------------------------FIN DE ACTUALIZACION DE CHEKOUT----------------------------------------------------- 
 //----------------------------------INTEGRACION DE FUNCIONES------------------------------------------------------------
+function visita() {
+  const numeroVisitas= visitas;
+  return numeroVisitas;
+}
+function sumarVisita() {
+  const sumVisitas = visitas;
 
+  const resulVisita = parseFloat(sumVisitas) + 1;
+  
+  return resulVisita;
+}
 //----------------------------------FIN INTEGRACION DE FUNCIONES-------------------------------------------------------- 
 //Fin de funciones------------------------------------------------------------------------------------------------------
   return (
@@ -243,7 +253,7 @@ const updateChekout = async (e) => {
 
                 <td>{placas}</td>
 
-                <td>{visitas}</td>
+                <td>{visita()}</td>
 
               </tr>
 
